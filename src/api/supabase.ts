@@ -23,6 +23,17 @@ export const authService = {
 
   async signUp(email: string, password: string, username?: string) {
     try {
+      // 检查邮箱是否已存在
+      const { data: existingUser } = await supabase
+        .from('users')
+        .select('id')
+        .eq('email', email)
+        .single()
+
+      if (existingUser) {
+        return { data: null, error: { message: '该邮箱已被注册' } }
+      }
+
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -35,7 +46,7 @@ export const authService = {
       })
 
       if (error) throw error
-      
+
       // 注册成功后自动创建用户档案（如果传了用户名）
       if (data.user && username) {
         await authService.createProfile(data.user.id, username)
