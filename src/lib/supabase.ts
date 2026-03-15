@@ -7,4 +7,40 @@ if (!supabaseUrl || !supabaseAnonKey) {
   console.warn('Supabase credentials not found in environment variables')
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    autoRefreshToken: true,
+    persistSession: true,
+    detectSessionInUrl: true,
+    flowType: 'implicit',
+    storage: {
+      getItem: (key: string) => {
+        if (typeof window !== 'undefined' && window.localStorage) {
+          return window.localStorage.getItem(key)
+        }
+        return null
+      },
+      setItem: (key: string, value: string) => {
+        if (typeof window !== 'undefined' && window.localStorage) {
+          window.localStorage.setItem(key, value)
+        }
+      },
+      removeItem: (key: string) => {
+        if (typeof window !== 'undefined' && window.localStorage) {
+          window.localStorage.removeItem(key)
+        }
+      }
+    },
+    cookies: {
+      name: 'supabase-auth-cookie',
+      options: {
+        path: '/',
+        sameSite: 'lax',
+        httpOnly: true,
+        secure: true,
+        domain: window.location.hostname,
+        maxAge: 3600
+      }
+    }
+  }
+})
