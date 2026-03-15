@@ -30,17 +30,6 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
           window.localStorage.removeItem(key)
         }
       }
-    },
-    cookies: {
-      name: 'supabase-auth-cookie',
-      options: {
-        path: '/',
-        sameSite: 'lax',
-        httpOnly: true,
-        secure: true,
-        domain: window.location.hostname,
-        maxAge: 3600
-      }
     }
   }
 })
