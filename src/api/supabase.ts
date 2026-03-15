@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase'
-import type { CategoryInsert, BookmarkInsert, CategoryUpdate, BookmarkUpdate, Profile, ProfileInsert, ProfileUpdate } from '@/types/supabase'
+import type { CategoryInsert, BookmarkInsert, CategoryUpdate, BookmarkUpdate, ProfileUpdate } from '@/types/supabase'
 
 // Auth operations
 export const authService = {

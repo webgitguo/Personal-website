@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Card, Form, Input, Button, Avatar, message, Space, Descriptions, Typography, Divider } from 'antd'
+import { Card, Form, Input, Button, Avatar, message, Space, Descriptions, Typography } from 'antd'
 import { UserOutlined, MailOutlined, CalendarOutlined, EditOutlined, SaveOutlined } from '@ant-design/icons'
 import { useAuth } from '@/contexts/AuthContext'
 import { profileService } from '@/api/supabase'

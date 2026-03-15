@@ -5,7 +5,7 @@ import { useAuth } from '@/contexts/AuthContext'
 import { categoryService } from '@/api/supabase'
 import type { CategoryWithBookmarks } from '@/types/supabase'
 
-const { Title, Text } = Typography
+const { Text } = Typography
 
 export default function Dashboard() {
   const { user, signOut } = useAuth()
